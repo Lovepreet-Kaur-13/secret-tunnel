@@ -27,8 +27,28 @@ export function AuthProvider({ children }) {
   }
 
   // TODO: authenticate
+  async function authenticate() {
+    try {
+      if (!token) {
+        throw new Error("failed token is not found");
+      }
+      const response = await fetch(API + "/authenticate", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("authentication failed");
+      }
 
-  const value = { location, signup };
+      setLocation("TUNNEL");
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const value = { location, signup, authenticate };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
