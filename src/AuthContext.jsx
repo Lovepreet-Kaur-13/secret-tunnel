@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const API = "https://fsa-jwt-practice.herokuapp.com/2608";
+const API = "https://fsa-jwt-practice.herokuapp.com";
 
 const AuthContext = createContext();
 
